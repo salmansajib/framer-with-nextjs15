@@ -1,9 +1,12 @@
 "use client";
 
 import { motion, useScroll } from "motion/react";
+import { useState } from "react";
 
 export default function Home() {
   const { scrollYProgress } = useScroll();
+
+  const [text, setText] = useState("Hover");
 
   return (
     <div className="overflow-hidden bg-zinc-950">
@@ -26,11 +29,21 @@ export default function Home() {
               opacity: 1,
               scale: 1,
               transition: {
-                duration: 1,
+                duration: 0.5,
               },
             }}
-            className="size-[150px] bg-blue-500 rounded-full"
-          ></motion.div>
+            whileHover={{
+              scale: 1.1,
+            }}
+            whileTap={{
+              scale: 0.9,
+            }}
+            className="w-[180px] h-[60px] bg-blue-400 text-lg text-zinc-950 font-medium rounded-full flex items-center justify-center"
+            onMouseEnter={() => setText("Tap")}
+            onMouseLeave={() => setText("Hover")}
+          >
+            {text}
+          </motion.div>
         </div>
 
         <div className="min-h-svh bg-slate-950 grid place-content-center">
@@ -45,12 +58,6 @@ export default function Home() {
               transition: {
                 duration: 1,
               },
-            }}
-            whileHover={{
-              scale: 1,
-            }}
-            whileTap={{
-              scale: 0.95,
             }}
             className="size-[150px] bg-green-500 rounded-full"
           ></motion.div>
